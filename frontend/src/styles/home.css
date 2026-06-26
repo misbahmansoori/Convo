@@ -1,0 +1,241 @@
+/* ==========================================
+   HOME PAGE
+   Dashboard After Login
+========================================== */
+
+.homeContainer {
+  min-height: 100vh;
+  background: #020617;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ==========================================
+   Background Blur
+========================================== */
+
+.homeBlur {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(140px);
+}
+
+.blurOne {
+  width: 350px;
+  height: 350px;
+  background: #7c3aed;
+  top: -100px;
+  left: -100px;
+  opacity: 0.3;
+}
+
+.blurTwo {
+  width: 350px;
+  height: 350px;
+  background: #2563eb;
+  bottom: -100px;
+  right: -100px;
+  opacity: 0.3;
+}
+
+/* ==========================================
+   Navbar
+========================================== */
+
+.homeNavbar {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 1.5rem 4rem;
+}
+
+.logo {
+  font-size: 2rem;
+}
+
+.navActions {
+  display: flex;
+  gap: 1rem;
+}
+
+/* ==========================================
+   Hero
+========================================== */
+
+.homeHero {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 3rem 2rem;
+}
+
+/* ==========================================
+   Main Card
+========================================== */
+
+.heroCard {
+  width: 100%;
+  max-width: 850px;
+
+  text-align: center;
+
+  padding: 3rem;
+
+  border-radius: 24px;
+
+  background: rgba(255,255,255,0.05);
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  backdrop-filter: blur(20px);
+}
+
+.heroCard h1 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  margin-bottom: 1rem;
+}
+
+.heroCard p {
+  color: #94a3b8;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+/* ==========================================
+   Meeting Input
+========================================== */
+
+.meetingInputSection {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.joinBtn {
+  min-width: 180px !important;
+  height: 56px;
+
+  background: linear-gradient(
+    135deg,
+    #8b5cf6,
+    #6366f1
+  ) !important;
+}
+
+/* ==========================================
+   Features
+========================================== */
+
+.featureGrid {
+  width: 100%;
+  max-width: 850px;
+
+  margin-top: 2rem;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 1rem;
+}
+
+.featureCard {
+  padding: 1.5rem;
+
+  border-radius: 18px;
+
+  background: rgba(255,255,255,0.05);
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  transition: 0.3s;
+}
+
+.featureCard:hover {
+  transform: translateY(-4px);
+}
+
+.featureCard svg {
+  color: #8b5cf6;
+  font-size: 2rem;
+  margin-bottom: 0.8rem;
+}
+
+.featureCard h3 {
+  margin-bottom: 0.5rem;
+}
+
+.featureCard p {
+  color: #94a3b8;
+}
+
+/* ==========================================
+   Responsive
+========================================== */
+
+@media (max-width: 768px) {
+
+  .homeNavbar {
+    padding: 1rem;
+  }
+
+  .meetingInputSection {
+    flex-direction: column;
+  }
+
+  .featureGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .heroCard {
+    padding: 2rem;
+  }
+}
+
+.newMeetingSection{
+    margin-bottom:30px;
+}
+
+.newMeetingBtn{
+    width:260px;
+    height:56px !important;
+
+    background:linear-gradient(
+        135deg,
+        #8b5cf6,
+        #6366f1
+    ) !important;
+
+    font-size:16px !important;
+    font-weight:600 !important;
+}
+
+.divider{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    margin:25px 0;
+}
+
+.divider::before,
+.divider::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:rgba(255,255,255,.1);
+}
+
+.divider span{
+    margin:0 15px;
+    color:#94a3b8;
+    font-weight:600;
+}

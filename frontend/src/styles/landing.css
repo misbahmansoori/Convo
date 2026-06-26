@@ -1,0 +1,298 @@
+/* ==========================================
+   LANDING PAGE
+   Modern SaaS Landing Page for Convo
+   ========================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.landingPageContainer {
+  min-height: 100vh;
+  background: #020617;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ==========================================
+   BACKGROUND BLUR EFFECTS
+   ========================================== */
+
+.landingBlur {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(140px);
+  pointer-events: none;
+}
+
+.blurOne {
+  width: 350px;
+  height: 350px;
+  background: #7c3aed;
+  top: -100px;
+  left: -120px;
+  opacity: 0.4;
+}
+
+.blurTwo {
+  width: 350px;
+  height: 350px;
+  background: #2563eb;
+  bottom: -100px;
+  right: -120px;
+  opacity: 0.35;
+}
+
+/* ==========================================
+   NAVBAR
+   ========================================== */
+.welcomeUser {
+  color: white;
+  font-weight: 600;
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.landingNavbar {
+  position: relative;
+  z-index: 10;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 1.5rem 6rem;
+}
+
+.navHeader h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.navList {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.navLink {
+  text-decoration: none;
+  color: #cbd5e1;
+  transition: 0.3s;
+}
+
+.navLink:hover {
+  color: white;
+}
+
+.navBtn {
+  border: none;
+  cursor: pointer;
+
+  padding: 12px 22px;
+
+  border-radius: 12px;
+
+  color: white;
+  font-weight: 600;
+
+  background: linear-gradient(135deg, #8b5cf6, #6366f1);
+}
+
+/* ==========================================
+   HERO SECTION
+   ========================================== */
+
+.landingHero {
+  position: relative;
+  z-index: 10;
+
+  min-height: calc(100vh - 90px);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 2rem;
+}
+
+.heroContent {
+  width: 100%;
+  max-width: 950px;
+
+  text-align: center;
+}
+
+/* ==========================================
+   BADGE
+   ========================================== */
+
+.heroBadge {
+  display: inline-block;
+
+  padding: 10px 18px;
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.05);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  color: #cbd5e1;
+
+  margin-bottom: 1.5rem;
+}
+
+/* ==========================================
+   HERO HEADING
+   ========================================== */
+
+.heroContent h1 {
+  font-size: clamp(3rem, 7vw, 5.5rem);
+
+  line-height: 1.1;
+
+  margin-bottom: 1.5rem;
+}
+
+.heroContent h1 span {
+  color: #8b5cf6;
+}
+
+.heroContent p {
+  max-width: 700px;
+
+  margin: auto;
+
+  color: #94a3b8;
+
+  font-size: 1.15rem;
+
+  line-height: 1.8;
+
+  margin-bottom: 2.5rem;
+}
+
+/* ==========================================
+   CTA BUTTONS
+   ========================================== */
+
+.heroButtons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+
+  margin-bottom: 4rem;
+}
+
+.primaryBtn,
+.secondaryBtn {
+  text-decoration: none;
+
+  padding: 15px 28px;
+
+  border-radius: 14px;
+
+  font-weight: 600;
+
+  transition: 0.3s;
+}
+
+.primaryBtn {
+  color: white;
+
+  background: linear-gradient(135deg, #8b5cf6, #6366f1);
+}
+
+.secondaryBtn {
+  color: white;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.primaryBtn:hover,
+.secondaryBtn:hover {
+  transform: translateY(-2px);
+}
+
+/* ==========================================
+   FEATURES GRID
+   ========================================== */
+
+.featureGrid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 1rem;
+}
+
+.featureCard {
+  background: rgba(255, 255, 255, 0.05);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 18px;
+
+  padding: 1.5rem;
+
+  transition: 0.3s;
+}
+
+.featureCard:hover {
+  transform: translateY(-4px);
+
+  border-color: rgba(139, 92, 246, 0.4);
+}
+
+.featureCard svg {
+  font-size: 2rem;
+
+  margin-bottom: 1rem;
+
+  color: #8b5cf6;
+}
+
+.featureCard h3 {
+  margin-bottom: 0.5rem;
+}
+
+.featureCard p {
+  font-size: 0.95rem;
+  color: #94a3b8;
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN
+   ========================================== */
+
+@media (max-width: 950px) {
+  .landingNavbar {
+    padding: 1.5rem 2rem;
+  }
+
+  .featureGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .heroButtons {
+    flex-direction: column;
+  }
+
+  .featureGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .heroContent h1 {
+    font-size: 3rem;
+  }
+}

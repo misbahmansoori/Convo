@@ -1,0 +1,109 @@
+/* ==========================================
+   HISTORY PAGE
+========================================== */
+
+.historyContainer {
+  min-height: 100vh;
+  background: #020617;
+  color: white;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background Blurs */
+
+.historyBlur {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(140px);
+}
+
+.blurOne {
+  width: 350px;
+  height: 350px;
+  background: #7c3aed;
+  top: -120px;
+  left: -100px;
+  opacity: 0.25;
+}
+
+.blurTwo {
+  width: 350px;
+  height: 350px;
+  background: #2563eb;
+  bottom: -120px;
+  right: -100px;
+  opacity: 0.25;
+}
+
+/* Navbar */
+
+.historyNavbar {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 2rem;
+}
+
+.historyNavbar h1 {
+  margin-bottom: 0.5rem;
+}
+
+.historyNavbar p {
+  color: #94a3b8;
+}
+
+.homeButton {
+  color: white !important;
+}
+
+/* Grid */
+
+.historyGrid {
+  position: relative;
+  z-index: 2;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fill, minmax(280px, 1fr));
+
+  gap: 1rem;
+}
+
+/* Card */
+
+.historyCard {
+  background: rgba(255,255,255,0.05) !important;
+
+  border: 1px solid rgba(255,255,255,0.08) !important;
+
+  color: white !important;
+
+  border-radius: 18px !important;
+
+  backdrop-filter: blur(15px);
+}
+
+/* Empty State */
+
+.emptyHistory {
+  width: 100%;
+  text-align: center;
+
+  padding: 4rem;
+
+  background: rgba(255,255,255,0.05);
+
+  border-radius: 24px;
+}
+
+.emptyHistory p {
+  color: #94a3b8;
+  margin: 1rem 0 2rem;
+}
