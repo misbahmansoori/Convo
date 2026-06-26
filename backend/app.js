@@ -3,6 +3,9 @@ import { createServer } from "node:http";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { Server } from "socket.io";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 import mongoose from "mongoose";
 import connectToSocket from "./src/controllers/socketManager.js";
@@ -29,9 +32,7 @@ app.get("/", (req, res) => {
 
 const start = async () => {
   app.set("mongo_user");
-  const connectionDb = await mongoose.connect(
-    "mongodb://misbahmansoori14_db_user:3Kcgxho1WSggt7nJ@ac-qdttsjm-shard-00-00.et3jzjz.mongodb.net:27017,ac-qdttsjm-shard-00-01.et3jzjz.mongodb.net:27017,ac-qdttsjm-shard-00-02.et3jzjz.mongodb.net:27017/?ssl=true&replicaSet=atlas-oa9erv-shard-0&authSource=admin&appName=Cluster0",
-  );
+  const connectionDb = await mongoose.connect(process.env.MONGO_URI);
   console.log("Mongo db connected ");
   server.listen(app.get("port"), () => {
     console.log("Listening on port 8000");
