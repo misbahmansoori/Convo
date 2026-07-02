@@ -25,7 +25,10 @@ app.use("/api/v1/users", userroutes);
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 app.get("/", (req, res) => {
-  res.sendFile(join(__dirname, "index.html"));
+  res.status(200).json({
+    success: true,
+    message: "Convo Backend API is running 🚀",
+  });
 });
 
 const start = async () => {
