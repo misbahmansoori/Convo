@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import withAuth from "../utils/withAuth";
 import { useNavigate } from "react-router-dom";
 import "../styles/home.css";
-import { v4 as uuid } from "uuid";
+import { generateMeetingCode } from "../utils/meetingCode";
 
 import { Button, IconButton, TextField } from "@mui/material";
 
@@ -36,7 +36,7 @@ function HomeComponent() {
   };
 
   const handleCreateMeeting = async () => {
-    const meetingId = uuid();
+    const meetingId = generateMeetingCode();
 
     try {
       await addToUserHistory(meetingId);
@@ -114,9 +114,10 @@ function HomeComponent() {
             <TextField
               fullWidth
               label="Meeting Code"
+              placeholder="e.g. abc-def-ghi"
               variant="outlined"
               value={meetingCode}
-              onChange={(e) => setMeetingCode(e.target.value)}
+              onChange={(e) => setMeetingCode(e.target.value.trim())}
               sx={{
                 "& .MuiInputBase-input": {
                   color: "#fff",

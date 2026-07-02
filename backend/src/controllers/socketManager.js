@@ -30,6 +30,7 @@ import { Server } from "socket.io";
 // NOTE: If server restarts, all this data is lost.
 // In production, Redis or a database would be a better choice.
 const connections = {}; //It stores which users are in which room
+const participants = {}; // room path -> { socketId: username }
 const messages = {}; //Stores chat history
 const timeOnline = {}; //When user connected
 
@@ -50,25 +51,30 @@ const connectToSocket = (server) => {
     // path acts as the room ID.
     // Example:
     // socket.emit("join-call", "room123")
-    socket.on("join-call", (path) => {
-      //checks room exists or not
+    socket.on("join-call", (path, username) => {
       if (connections[path] === undefined) {
         connections[path] = [];
       }
 
-      //add user to room
-      connections[path].push(socket.id);
+      if (participants[path] === undefined) {
+        participants[path] = {};
+      }
 
-      //stores joining time
+      connections[path].push(socket.id);
+      participants[path][socket.id] =
+        username?.trim() || `Guest ${socket.id.slice(0, 6)}`;
+
       timeOnline[socket.id] = new Date();
 
-      // Notify all users in the room that a new participant has joined.
-      // Frontend can use this event to create WebRTC peer connections.
+      const participantMap = { ...participants[path] };
+
       for (let a = 0; a < connections[path].length; a++) {
         io.to(connections[path][a]).emit(
           "user-joined",
           socket.id,
+          participants[path][socket.id],
           connections[path],
+          participantMap,
         );
       }
 
@@ -165,6 +171,13 @@ const connectToSocket = (server) => {
             var index = connections[key].indexOf(socket.id);
 
             connections[key].splice(index, 1);
+
+            if (participants[key]) {
+              delete participants[key][socket.id];
+              if (Object.keys(participants[key]).length === 0) {
+                delete participants[key];
+              }
+            }
 
             // Delete room if no participants remain.
             if (connections[key].length === 0) {

@@ -2,6 +2,7 @@ import "../styles/landing.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext, React } from "react";
 import { AuthContext } from "../contexts/AuthContext";
+import { generateMeetingCode } from "../utils/meetingCode";
 
 // MUI Icons
 import VideoCallIcon from "@mui/icons-material/VideoCall";
@@ -10,16 +11,6 @@ import ScreenShareIcon from "@mui/icons-material/ScreenShare";
 import SecurityIcon from "@mui/icons-material/Security";
 
 export default function Landing() {
-  const generateMeetingCode = () => {
-    return (
-      Math.random().toString(36).substring(2, 5) +
-      "-" +
-      Math.random().toString(36).substring(2, 5) +
-      "-" +
-      Math.random().toString(36).substring(2, 5)
-    );
-  };
-
   const { userData, setUserData } = useContext(AuthContext);
   const navigate = useNavigate();
 
