@@ -1,4 +1,5 @@
 import React, { useCallback, useContext, useEffect, useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import io from "socket.io-client";
 import styles from "../styles/videoComponent.module.css";
 import server from "../environment";
@@ -20,6 +21,8 @@ const audioConstraints = {
 };
 
 export default function VideoMeetComponent() {
+  const { url: roomId } = useParams();
+  const navigate = useNavigate();
   const { userData } = useContext(AuthContext);
   const socketRef = useRef();
   const socketIdRef = useRef();
@@ -433,7 +436,9 @@ export default function VideoMeetComponent() {
     if (initializedRef.current) return;
     initializedRef.current = true;
 
-    socketRef.current = io.connect(server_url, { secure: false });
+    socketRef.current = io(server_url, {
+      transports: ["websocket", "polling"],
+    });
 
     socketRef.current.on("signal", gotMessageFromServer);
     socketRef.current.on("chat-message", addMessage);
@@ -468,7 +473,7 @@ export default function VideoMeetComponent() {
     });
 
     socketRef.current.on("connect", () => {
-      socketRef.current.emit("join-call", window.location.href, username);
+      socketRef.current.emit("join-call", roomId, username);
       socketIdRef.current = socketRef.current.id;
       setLocalSocketId(socketRef.current.id);
       setParticipants((prev) => ({
@@ -508,7 +513,7 @@ export default function VideoMeetComponent() {
     }
     socketRef.current?.disconnect();
     initializedRef.current = false;
-    window.location.href = "/";
+    navigate(localStorage.getItem("token") ? "/home" : "/");
   };
 
   const connect = () => {
@@ -530,7 +535,8 @@ export default function VideoMeetComponent() {
           <div className={styles.meetHeader}>
             <span className={styles.meetHeaderDot} />
             <span>
-              {username} &middot; {1 + videos.filter((v) => v.socketId !== localSocketId).length}{" "}
+              {username} &middot; Room {roomId} &middot;{" "}
+              {1 + videos.filter((v) => v.socketId !== localSocketId).length}{" "}
               participant
               {1 + videos.filter((v) => v.socketId !== localSocketId).length !== 1 ? "s" : ""}
             </span>

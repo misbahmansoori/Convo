@@ -12,9 +12,24 @@ const add_to_activity = async (req, res) => {
       return res.status(httpStatus.BAD_REQUEST).json({ message: "Meeting code is required" });
     }
 
+    const existingActivity = await Meeting.findOne({
+      user_id,
+      meetingCode,
+    });
+
+    if (existingActivity) {
+      existingActivity.date = new Date();
+      await existingActivity.save();
+
+      return res.status(httpStatus.OK).json({
+        message: "Activity updated successfully",
+        activity: existingActivity,
+      });
+    }
+
     const newActivity = new Meeting({
-      user_id: user_id,
-      meetingCode: meetingCode,
+      user_id,
+      meetingCode,
     });
 
     await newActivity.save();

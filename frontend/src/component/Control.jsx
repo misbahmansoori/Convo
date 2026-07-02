@@ -49,7 +49,12 @@ export default function Controls({
         }}
         aria-label="Toggle chat"
       >
-        <Badge badgeContent={newMessages} max={99} color="warning">
+        <Badge
+          badgeContent={newMessages}
+          max={99}
+          color="warning"
+          invisible={!newMessages}
+        >
           <ChatIcon />
         </Badge>
       </IconButton>

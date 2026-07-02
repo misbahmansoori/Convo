@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Button, IconButton, TextField } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import styles from "../styles/videoComponent.module.css";
@@ -11,6 +11,12 @@ export default function ChatRoom({
   sendMessage,
   onClose,
 }) {
+  const chatEndRef = useRef(null);
+
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, showModal]);
+
   if (!showModal) return null;
 
   const handleSend = () => {
@@ -38,6 +44,7 @@ export default function ChatRoom({
           ) : (
             <p className={styles.chatEmpty}>No messages yet. Say hello!</p>
           )}
+          <div ref={chatEndRef} />
         </div>
 
         <div className={styles.chattingArea}>
@@ -55,7 +62,7 @@ export default function ChatRoom({
                 borderRadius: "12px",
               },
               "& .MuiOutlinedInput-notchedOutline": {
-                borderColor: "rgba(255,255,255,0.12)",
+                borderColor: "rgba(255, 255, 255, 0.12)",
               },
             }}
           />

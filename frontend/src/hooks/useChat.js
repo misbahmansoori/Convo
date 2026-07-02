@@ -3,7 +3,7 @@ import { useState } from "react";
 export default function useChat(socketRef, socketIdRef, username) {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
-  const [newMessages, setNewMessages] = useState(3);
+  const [newMessages, setNewMessages] = useState(0);
 
   const addMessage = (data, sender, socketIdSender) => {
     setMessages((prevMessages) => [

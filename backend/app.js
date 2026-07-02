@@ -2,7 +2,6 @@ import express from "express";
 import { createServer } from "node:http";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
-import { Server } from "socket.io";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -15,8 +14,7 @@ import userroutes from "./src/routes/user.routes.js";
 
 const app = express();
 const server = createServer(app);
-const io = connectToSocket(server);
-
+connectToSocket(server);
 app.set("port", process.env.PORT || 8000);
 app.use(cors());
 app.use(express.json({ limit: "40kb" }));
@@ -31,11 +29,10 @@ app.get("/", (req, res) => {
 });
 
 const start = async () => {
-  app.set("mongo_user");
-  const connectionDb = await mongoose.connect(process.env.MONGO_URI);
-  console.log("Mongo db connected ");
-  server.listen(app.get("port"), () => {
-    console.log("Listening on port 8000");
+  await mongoose.connect(process.env.MONGO_URI);
+  console.log("MongoDB connected");
+  const port = app.get("port");  server.listen(port, () => {
+    console.log(`Server listening on port ${port}`);
   });
 };
 
